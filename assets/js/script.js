@@ -1,3 +1,22 @@
+// Wait for the DOM to finish loading before running game
+// Get the button elements and add eventlisteners to them
+document.addEventListener('DOMContentLoaded', function() {
+    let buttons = document.getElementsByTagName('button');
+
+    for (let button of buttons) {
+        button.addEventListener('click', function() {
+            if (this.getAttribute('data-type') === "submit") {
+                alert("You clicked submit!");
+            } else {
+                let gameType = this.getAttribute('data-type');
+                    alert(`You click ${gameType}`);
+
+            }
+        })
+    }
+})
+
+
 function runGame() {
 
 }
@@ -32,5 +51,5 @@ function displayMultiplyQuestion() {
 }
 
 function displayDivisionQuestion() {
-    
+
 }
