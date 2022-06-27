@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let button of buttons) {
         button.addEventListener('click', function() {
             if (this.getAttribute('data-type') === "submit") {
-                alert("You clicked submit!");
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute('data-type');
                 runGame(gameType);
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
  * and after the user's answer had been processed
  */
 
-function runGame() {
+function runGame(gameType) {
 
     // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
@@ -39,11 +39,38 @@ function runGame() {
 
 }
 
-function checkAnswer() {
+/**
+ *  Checks the answer against the first element in 
+ * the returned calculateCorrectAnswer array
+ */
 
+function checkAnswer() {
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
+
+    if (isCorrect) {
+        alert("Hey ! You got it right! :)")
+    }
 }
 
+
+/**
+ * Gets the operands (the number) and the operator (plus, division, etc)
+ * directly fromt the DOM, and returns the correct answer.
+ * 
+ */
 function calculateCorrectAnswer() {
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById("operator").innerText;
+
+    if (operator === '+') {
+        return [operand1 + operand2, "addition"];
+    } else {
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimpletmented operator ${operator}.Aborting`;
+    }
 
 }
 
